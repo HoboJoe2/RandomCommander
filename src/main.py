@@ -53,6 +53,7 @@ def main():
         print()
         for i in range(59):
             generate_spells(color_id)
+        print()
         generate_lands()
     return
 
