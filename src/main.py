@@ -29,7 +29,7 @@ def generate_spells(colors):
     regex_search = re.findall("[A-Z]", colors)
     colors_string = "".join(regex_search)
     response = call_random_api({
-        "q": f"id:{colors_string} -type:land game:paper", "format": "json"
+        "q": f"id:{colors_string} -type:land -type:attraction -type:contraption game:paper", "format": "json"
     })
     spell = card.Card(response.json())
     print(spell.generate_name())
