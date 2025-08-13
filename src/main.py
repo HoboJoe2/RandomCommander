@@ -1,7 +1,5 @@
 import time
 import requests
-import card
-import re
 
 
 def call_random_api(params):
@@ -11,35 +9,61 @@ def call_random_api(params):
         params=payload,
         verify=True
     )
-    time.sleep(0.01)
+    time.sleep(0.1)
     return response
 
 
-def generate_commander():
+def generate_spell():
     response = call_random_api({
-        "q": "type:creature type:legendary game:paper", "format": "json"
+        "q": f"-type:land legal:vintage -name:'Garth One-Eye'", "format": "json"
     })
-    commander = card.Card(response.json())
-    print(commander.generate_name())
-    print("1 Worldknit")
-    return commander.get_color_id()
-
-
-def generate_spells(colors):
-    regex_search = re.findall("[A-Z]", colors)
-    colors_string = "".join(regex_search)
-    response = call_random_api({
-        "q": f"id:{colors_string} -type:land -type:attraction -type:contraption game:paper", "format": "json"
-    })
-    spell = card.Card(response.json())
-    print(spell.generate_name())
+    spell = response.json()["name"]
+    print(f"1 {spell}")
     return
 
 
 def generate_lands():
-    print("40 Wastes")
+    print("1 Arid Mesa")
+    print("1 Ash Barrens")
+    print("1 Badlands")
+    print("1 Bayou")
+    print("1 Bloodstained Mire")
+    print("1 City of Brass")
+    print("1 Command Tower")
+    print("1 Exotic Orchard")
+    print("1 Flooded Strand")
+    print("1 Indatha Triome")
+    print("1 Jetmir's Garden")
+    print("1 Ketria Triome")
+    print("1 Mana Confluence")
+    print("1 Marsh Flats")
+    print("1 Misty Rainforest")
+    print("1 Plateau")
+    print("1 Polluted Delta")
+    print("1 Raffine's Tower")
+    print("1 Raugrin Triome")
+    print("1 Savai Triome")
+    print("1 Savannah")
+    print("1 Scalding Tarn")
+    print("1 Scrubland")
+    print("1 Snow-Covered Forest")
+    print("1 Snow-Covered Island")
+    print("1 Snow-Covered Mountain")
+    print("1 Snow-Covered Plains")
+    print("1 Snow-Covered Swamp")
+    print("1 Spara's Headquarters")
+    print("1 Taiga")
+    print("1 Tropical Island")
+    print("1 Tundra")
+    print("1 Underground Sea")
+    print("1 Verdant Catacombs")
+    print("1 Volcanic Island")
+    print("1 Windswept Heath")
+    print("1 Wooded Foothills")
+    print("1 Xander's Lounge")
+    print("1 Zagoth Triome")
+    print("1 Ziatora's Proving Ground")
     return
-
 
 def main():
     inpt = ""
@@ -49,11 +73,8 @@ def main():
             break
         else:
             pass
-        color_id = generate_commander()
-        print()
-        for i in range(59):
-            generate_spells(color_id)
-        print()
+        for _ in range(59):
+            generate_spell()
         generate_lands()
     return
 
